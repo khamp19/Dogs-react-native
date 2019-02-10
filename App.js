@@ -1,37 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
-import Dogs from './Components/dogs';
+// import ExampleApp from './exampleApp';
+import Dogs from  './dogs';
+import reducer from './reducers';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Button 
-          onPress={() => {console.log("pressed button")}}
-          title="Press me!"
-        />
-        <View>
-          <Dogs />
-        </View>
-      </View>
+const App = () => {
+  const middleware = applyMiddleware(thunk);
+  const store = createStore(reducer, middleware);
+  return (
+      <Provider store={store}>
+        <Dogs />
+      </Provider>
     );
-  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  paragraph: {
-    margin: 20,
-    fontSize: 18,
-    textAlign: 'center'
-  },
-});
-
-const { container, paragraph } = styles;
+export default App;
