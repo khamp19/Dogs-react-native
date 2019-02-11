@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-// import ExampleApp from './exampleApp';
 import Dogs from  './dogs';
 import reducer from './reducers';
 
